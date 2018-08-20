@@ -1,0 +1,7 @@
+{
+  "name": "Doolio",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
