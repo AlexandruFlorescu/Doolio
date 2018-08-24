@@ -1,0 +1,101 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-navbar color='primary'>
+      <ion-title>
+        Profile
+      </ion-title>
+    </ion-navbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <img src="{{myProfile.image}}" (click)='changePicture()'>
+        </ion-col>
+        <ion-col col-8>
+          <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input [(ngModel)]='myProfile.username'></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>First Name</ion-label>
+            <ion-input [(ngModel)]='myProfile.firstName'></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Last Name</ion-label>
+            <ion-input [(ngModel)]='myProfile.lastName'></ion-input>
+          </ion-item>
+
+        </ion-col>
+
+      </ion-row>
+      <ion-row justify-content-center	>
+        <button ion-button *ngIf='myProfile.username == ""' (click)='createProfile()'>Create Profile</button>
+        <button ion-button *ngIf='myProfile.username != ""' (click)='updateProfile()'>Update Profile</button>
+        <button ion-button color='light' (click)='logoutUser()'>Logout</button>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+
+  <ion-card >
+    <ion-grid>
+      <ion-row>
+        <ion-label col-3>Current Amount: {{roundNumber(myProfile.treatPoints)}}</ion-label>
+        <ion-item col-3>
+          <ion-label stacked>TP amount</ion-label>
+          <ion-input type="numeric" value=0 #tp></ion-input>
+        </ion-item>
+        <button ion-button icon-button col-1 (click)='addTreatPoints(tp.value)'>
+          <ion-icon name="add"></ion-icon> Add
+        </button>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-label col-3>Current Amount: {{roundNumber(myProfile.fitnessPoints)}}</ion-label>
+        <ion-item col-3>
+          <ion-label stacked>FP amount</ion-label>
+          <ion-input type="numeric" value=0 #fp></ion-input>
+        </ion-item>
+        <button ion-button icon-button col-1 (click)='addFitnessPoints(fp.value)'>
+          <ion-icon name="add"></ion-icon> Add
+        </button>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-label col-3>Current Amount: {{roundNumber(myProfile.money)}}</ion-label>
+        <ion-item col-3>
+          <ion-label stacked>Money amount</ion-label>
+          <ion-input type="numeric" value=0 #money></ion-input>
+        </ion-item>
+        <button ion-button icon-button col-1 (click)='addMoney(money.value)'>
+          <ion-icon name="add"></ion-icon> Add
+        </button>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+
+
+</ion-content>

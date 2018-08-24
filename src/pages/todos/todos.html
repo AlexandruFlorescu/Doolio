@@ -1,0 +1,77 @@
+<!--
+  Generated template for the TodosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Todos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+      <ion-card>
+        <ion-navbar color='primary'>
+          <ion-title>
+            Todos
+
+          </ion-title>
+          <ion-buttons end>
+            <button ion-button icon-only (click)='addTodo()'>
+              <ion-icon name='add'></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-navbar>
+        <ion-card-content>
+
+          <ion-label col-3>Current Amount: {{roundNumber(myProfile.treatPoints)}}</ion-label>
+          <ion-label col-3>Current Amount: {{roundNumber(myProfile.fitnessPoints)}}</ion-label>
+          <ion-label col-3>Current Amount: {{roundNumber(myProfile.money)}}</ion-label>
+          <ion-grid>
+            <ion-row *ngFor='let todo of todos'>
+                <ion-col col-2>
+                  <ion-row>
+                    <ion-title>
+                      {{todo.title}}
+                    </ion-title>
+                  </ion-row>
+                  <ion-row>
+                    {{todo.description}}
+                  </ion-row>
+                </ion-col>
+
+                <ion-col>
+
+                  <ion-row>
+                    <ion-item col-3>
+                      <ion-label stacked>TreatPoints per 1 {{todo.unit}}</ion-label>
+                      <ion-input [(ngModel)]='todo.TP' ></ion-input>
+                    </ion-item>
+
+                    <ion-item col-3>
+                      <ion-label stacked>FitnessPoints per 1 {{todo.unit}}</ion-label>
+                      <ion-input [(ngModel)]='todo.FP'></ion-input>
+                    </ion-item>
+
+                    <ion-item col-3>
+                      <ion-label stacked>Money per 1 {{todo.unit}}</ion-label>
+                      <ion-input [(ngModel)]='todo.Money'></ion-input>
+                    </ion-item>
+                    <button ion-button (click)='updateTodo(todo)'>Update</button>
+                    <button ion-button color='danger' (click)='deleteTodo(todo)'>Delete</button>
+
+                    <button ion-button (click)='complete(todo)'>Done!</button>
+                  </ion-row>
+                </ion-col>
+
+
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+</ion-content>
