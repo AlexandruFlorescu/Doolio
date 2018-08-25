@@ -36,10 +36,25 @@ $app-direction: ltr;
 $colors: (
   primary:    #488aff,
   secondary:  #32db64,
+  ternary:    purple,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
 );
+
+$break-small: 460px;
+$break-large: 1200px;
+
+ion-menu {
+  max-width: 250px!important;
+  @media screen and (max-width: $break-small) {
+    max-width: 590px!important;
+
+  }
+  @media screen and (min-width: $break-large) {
+
+  }
+}
 
 
 // App iOS Variables

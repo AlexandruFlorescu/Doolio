@@ -4,7 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
@@ -36,7 +35,6 @@ import { AddSnapshotModalPage } from '../pages/add-snapshot-modal/add-snapshot-m
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     RegisterPage,
     ProfilePage,
@@ -62,7 +60,6 @@ import { AddSnapshotModalPage } from '../pages/add-snapshot-modal/add-snapshot-m
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     RegisterPage,
     ProfilePage,

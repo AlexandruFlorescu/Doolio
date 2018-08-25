@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { FirestorageProvider } from '../../providers/firestorage/firestorage';
 import { AddTodoModalPage } from '../add-todo-modal/add-todo-modal';
+import { LoginPage } from '../login/login';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the TodosPage page.
@@ -20,13 +22,21 @@ export class TodosPage {
 
   myProfile: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController) {
-    this.fetchProfile();
-    this.fetchTodos();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController, public afAuth: AngularFireAuth) {
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TodosPage');
+  ionViewWillLoad(){
+      // already logged in guard
+      this.afAuth.authState.subscribe(data=> {
+        if(data == null)
+          this.navCtrl.setRoot(LoginPage)
+        else
+        {
+          this.fetchProfile();
+          this.fetchTodos();
+        }
+    })
   }
 
     roundNumber(nr) {
@@ -73,7 +83,8 @@ export class TodosPage {
     }
     //
 
-    complete(todo){
+    async complete(todo){
+      await this.fsp.wjTodo(todo);
       this.fsp.deleteTodo(todo);
       this.addTreatPoints( parseFloat(todo.TP) )
       this.addFitnessPoints( parseFloat(todo.FP) )

@@ -29,11 +29,11 @@ export class RegisterPage {
         {
 
           this.navCtrl.setRoot(ProfilePage);
-          this.toast.create({
-            message: `Welcome Back, ${data.email}!`,
-            duration: 2000,
-            position: 'top'
-          }).present();
+          // this.toast.create({
+          //   message: `Welcome Back, ${data.email}!`,
+          //   duration: 2000,
+          //   position: 'top'
+          // }).present();
         }
     })
   }

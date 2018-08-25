@@ -14,5 +14,77 @@
 
 
 <ion-content padding>
+  <ion-card>
+    <ion-navbar color='primary'>
+      <ion-title>Journal formulations</ion-title>
+    </ion-navbar>
+    <ion-card-content>
+      <p>Feel free to change the templates to your own likings. Some templates include variables. You should use those, but only those are available atm.</p>
+      {{formulas | json}}
+      <ion-item>
+        <ion-label stacked>Introductory formula</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.Introductory.text'></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label stacked>Time and Date</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.TimeAndDate.text'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Finished todo</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.FinishedTodo.text'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Finished chore</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.FinishedChore.text'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Did exercise</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.DidExercise.text'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Progress towards goal</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.ProgressGoal.text'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Finished goal</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.FinishedGoal.text'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Treat gained</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.GotTreat.text'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Rewards gained</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.Rewards.text'></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label stacked>Costs payd</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.Costs.text'></ion-input>
+      </ion-item>
+
+
+      <!-- <ion-item>
+        <ion-label stacked>Finished todo</ion-label>
+        <ion-input type='text'>{{formulas.finishedTodo}}</ion-input>
+      </ion-item> -->
+
+
+      <ion-item>
+        <ion-label stacked>Closing formula</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.Closing.text'></ion-input>
+      </ion-item>
+
+      <button ion-button (click)='updateFormulas()'>Update formulas</button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

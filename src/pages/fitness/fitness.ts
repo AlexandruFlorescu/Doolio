@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { FirestorageProvider } from '../../providers/firestorage/firestorage';
 import { AddExerciseModalPage } from '../add-exercise-modal/add-exercise-modal';
+import { LoginPage } from '../login/login';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the FitnessPage page.
@@ -18,15 +20,22 @@ export class FitnessPage {
   exercises: any;
   myProfile: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController, public afAuth: AngularFireAuth) {
 
-      this.fetchProfile();
-      this.fetchExercises();
+  }
+  ionViewWillLoad(){
+      // already logged in guard
+      this.afAuth.authState.subscribe(data=> {
+        if(data == null)
+          this.navCtrl.setRoot(LoginPage)
+        else
+        {
+            this.fetchProfile();
+            this.fetchExercises();
+        }
+    })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FitnessPage');
-  }
 
   roundNumber(nr) {
     return Math.round(nr * 100)/100;
@@ -79,10 +88,13 @@ export class FitnessPage {
     addReps(exercise, amount){
       console.log(exercise, amount);
       this.fsp.addReps(exercise, amount);
+      this.fsp.wjExercise(exercise, amount);
       this.addTreatPoints( parseFloat(exercise.TP) * amount )
       this.addFitnessPoints( parseFloat(exercise.FP) * amount )
       this.addMoney( parseFloat(exercise.Money) * amount )
     }
+
+
 
 
 

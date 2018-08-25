@@ -1,3 +1,34 @@
 page-journal {
 
 }
+.pStyle{
+  color: color($colors, light) !important;
+}
+
+.rewardsStyle{
+  color: color($colors, secondary);
+}
+
+.timeStyle{
+  color: color($colors, primary);
+}
+
+.dateStyle{
+  color: color($colors, primary);
+}
+
+.exerciseStyle{
+  color: color($colors, ternary);
+}
+
+.todosStyle{
+  color: color($colors, ternary);
+}
+
+.costsStyle{
+  color: color($colors, danger);
+}
+
+.treatStyle{
+  color: color($colors, ternary);
+}

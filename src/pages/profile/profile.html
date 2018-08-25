@@ -27,7 +27,7 @@
     <ion-grid>
       <ion-row>
         <ion-col col-4>
-          <img src="{{myProfile.image}}" (click)='changePicture()'>
+          <img src="{{myProfile.image ? myProfile.image : 'https://via.placeholder.com/350x150'}}" (click)='changePicture()'>
         </ion-col>
         <ion-col col-8>
           <ion-item>
@@ -49,8 +49,8 @@
 
       </ion-row>
       <ion-row justify-content-center	>
-        <button ion-button *ngIf='myProfile.username == ""' (click)='createProfile()'>Create Profile</button>
-        <button ion-button *ngIf='myProfile.username != ""' (click)='updateProfile()'>Update Profile</button>
+        <button ion-button *ngIf='new == true' (click)='createProfile()'>Create Profile</button>
+        <button ion-button *ngIf='new == false' (click)='updateProfile()'>Update Profile</button>
         <button ion-button color='light' (click)='logoutUser()'>Logout</button>
       </ion-row>
     </ion-grid>

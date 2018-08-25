@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { FirestorageProvider } from '../../providers/firestorage/firestorage';
 import { AddTreatModalPage } from '../add-treat-modal/add-treat-modal';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the TreatsPage page.
@@ -20,10 +22,22 @@ export class TreatsPage {
   treats: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController, public alertCtrl: AlertController,  public afAuth: AngularFireAuth) {
 
-      this.fetchProfile();
-      this.fetchTreats();
+  }
+
+  ionViewWillLoad(){
+      // already logged in guard
+      this.afAuth.authState.subscribe(data=> {
+      console.log(data);
+        if(data == null)
+          this.navCtrl.setRoot(LoginPage)
+        else
+        {
+            this.fetchProfile();
+            this.fetchTreats();
+        }
+    })
   }
 
   ionViewDidLoad() {
@@ -52,6 +66,7 @@ export class TreatsPage {
       this.addTreatPoints(parseFloat(amount) * treat.TP)
       this.addFitnessPoints(parseFloat(amount) * treat.FP)
       this.addMoney(parseFloat(amount) * treat.Money)
+      this.fsp.wjTreat(treat, amount);
       this.fsp.updateQuantity(treat, parseFloat(amount));
     }
     else

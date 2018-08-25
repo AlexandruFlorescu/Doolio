@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { AddSnapshotModalPage } from '../add-snapshot-modal/add-snapshot-modal';
 import { FirestorageProvider } from '../../providers/firestorage/firestorage';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-journal',
@@ -9,16 +11,29 @@ import { FirestorageProvider } from '../../providers/firestorage/firestorage';
 })
 export class JournalPage {
 
-  dateStart : any = new Date().toISOString();
+  // dateStart : any = new Date().toISOString();
   timeStart: any = new Date().toISOString();
-  dateEnd: any = new Date().toISOString();
+  // dateEnd: any = new Date().toISOString();
   timeEnd: any = new Date().toISOString();
   snapshots: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl:ModalController, public fsp: FirestorageProvider) {
-    this.fetchJournal();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl:ModalController, public fsp: FirestorageProvider,  public afAuth: AngularFireAuth) {
 
   }
+
+    ionViewWillLoad(){
+        // already logged in guard
+        this.afAuth.authState.subscribe(data=> {
+        console.log(data);
+          if(data == null)
+            this.navCtrl.setRoot(LoginPage)
+          else
+          {
+            this.fetchJournal();
+
+          }
+      })
+    }
 
   convertDate(input){
     var weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -38,7 +53,7 @@ export class JournalPage {
   fetchJournalWithFilter(start, end){
     this.fsp.fetchJournalWithFilter(start, end).subscribe( snapshots => {
       this.snapshots = snapshots;
-    
+
     })
   }
 

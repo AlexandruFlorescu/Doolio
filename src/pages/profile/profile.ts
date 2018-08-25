@@ -3,6 +3,8 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { FirestorageProvider } from '../../providers/firestorage/firestorage';
 import { ChangePictureModalPage } from '../change-picture-modal/change-picture-modal';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the ProfilePage page.
@@ -20,13 +22,23 @@ export class ProfilePage {
   // profile = { } as Profile;
   // profile: any;
 
-  myProfile: any = {  username: '',  firstName: '',  lastName: ''};
-  exercises: any;
-
-  constructor(  public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController) {
-
-    this.fetchProfile();
+  myProfile = {image:""};
+  new = true;
+  constructor(  public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController, public afAuth: AngularFireAuth) {
   }
+
+
+    ionViewWillLoad(){
+        // already logged in guard
+        this.afAuth.authState.subscribe(data=> {
+          if(data == null)
+            this.navCtrl.setRoot(LoginPage)
+          else
+          {
+              this.fetchProfile();
+          }
+      })
+    }
 
   roundNumber(nr) {
     return Math.round(nr * 100)/100;
@@ -34,7 +46,14 @@ export class ProfilePage {
 
   fetchProfile(){
     this.fsp.fetchProfile().then(()=>{
-      this.myProfile = this.fsp.profile;
+      console.log('fetched');
+
+      if(this.fsp.profile)
+      {
+        this.myProfile = this.fsp.profile;
+        this.new = false;
+
+      }
     });
   }
 
@@ -54,7 +73,7 @@ export class ProfilePage {
   }
 
   logoutUser(){
-    // this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut();
     this.navCtrl.setRoot(HomePage);
   }
 

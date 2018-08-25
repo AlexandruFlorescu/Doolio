@@ -31,22 +31,13 @@ export class LoginPage {
     // already logged in guard
     this.afAuth.authState.subscribe(data=> {
       if(data && data.email && data.uid)
-        {
-          this.toast.create({
-            message: `Welcome Back, ${data.email}!`,
-            duration: 2000,
-            position: 'top'
-          }).present();
-          this.navCtrl.setRoot(ProfilePage);
-
-        }
-
+        this.navCtrl.setRoot(ProfilePage);
     })
   }
 
   async loginUser(){
     try {
-      const result = this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
+      await this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
       this.navCtrl.setRoot(ProfilePage);
     }
     catch ( e ) {
