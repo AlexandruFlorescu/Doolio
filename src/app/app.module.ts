@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Calendar } from '@ionic-native/calendar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -12,6 +13,10 @@ import { FitnessPage } from '../pages/fitness/fitness';
 import { TodosPage } from '../pages/todos/todos';
 import { JournalPage } from '../pages/journal/journal';
 import { SettingsPage } from '../pages/settings/settings';
+import { GoalsPage } from '../pages/goals/goals';
+import { ChoresPage } from '../pages/chores/chores';
+import { SchedulePage } from '../pages/schedule/schedule';
+import { CalendarDetailsPage } from '../pages/calendar-details/calendar-details';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,7 +33,14 @@ import { AddTreatModalPage } from '../pages/add-treat-modal/add-treat-modal';
 import { ChangePictureModalPage } from '../pages/change-picture-modal/change-picture-modal';
 import { AddTodoModalPage } from '../pages/add-todo-modal/add-todo-modal';
 import { AddSnapshotModalPage } from '../pages/add-snapshot-modal/add-snapshot-modal';
+import { AddGoalModalPage } from '../pages/add-goal-modal/add-goal-modal';
 
+
+import { ChipComponent } from '../components/chip/chip';
+import { AddChoresModalPage } from '../pages/add-chores-modal/add-chores-modal';
+import { AddExercisePlanPage } from '../pages/add-exercise-plan/add-exercise-plan';
+import { AddExerciseToPlanPage } from '../pages/add-exercise-to-plan/add-exercise-to-plan';
+import { AddNewMilestoneModalPage } from '../pages/add-new-milestone-modal/add-new-milestone-modal';
 
 
 @NgModule({
@@ -47,14 +59,24 @@ import { AddSnapshotModalPage } from '../pages/add-snapshot-modal/add-snapshot-m
     AddTodoModalPage,
     JournalPage,
     AddSnapshotModalPage,
-    SettingsPage
+    SettingsPage,
+    GoalsPage,
+    AddGoalModalPage,
+    ChipComponent,
+    ChoresPage,
+    AddChoresModalPage,
+    AddExercisePlanPage,
+    AddExerciseToPlanPage,
+    AddNewMilestoneModalPage,
+    SchedulePage,
+    CalendarDetailsPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,13 +94,25 @@ import { AddSnapshotModalPage } from '../pages/add-snapshot-modal/add-snapshot-m
     AddTodoModalPage,
     JournalPage,
     AddSnapshotModalPage,
-    SettingsPage
+    SettingsPage,
+    GoalsPage,
+    AddGoalModalPage,
+    ChipComponent,
+    ChoresPage,
+    AddChoresModalPage,
+    AddExercisePlanPage,
+    AddExerciseToPlanPage,
+    AddNewMilestoneModalPage,
+    SchedulePage,
+    CalendarDetailsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirestorageProvider
-  ]
+    FirestorageProvider,
+    Calendar
+  ],
+
 })
 export class AppModule {}

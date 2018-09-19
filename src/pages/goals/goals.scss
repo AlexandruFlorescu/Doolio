@@ -1,0 +1,20 @@
+.finished{
+  color: color($colors, good);
+
+  vertical-align: middle;
+}
+.unfinished{
+  color: color($colors, inter);
+
+  vertical-align: middle;
+}
+.milestoneStyle{
+  border-bottom: 1px solid color($colors, inter);
+  margin-top: 10px;
+  padding: 0px 0px;
+}
+.actionMSButtons{
+  border-left: 1px solid color($colors, inter);
+  width: 30px !important;
+  flex-basis: 7%;
+}

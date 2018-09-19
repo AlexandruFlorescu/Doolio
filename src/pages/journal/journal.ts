@@ -17,6 +17,16 @@ export class JournalPage {
   timeEnd: any = new Date().toISOString();
   snapshots: any;
 
+  myProfile: any = {};
+  allCategories = [
+    {'title':'goal', 'allowed':true},
+    {'title':'chore', 'allowed':true},
+    {'title':'treat', 'allowed':true},
+    {'title':'exercise', 'allowed':true},
+    {'title':'todo', 'allowed':true},
+    {'title':'plan', 'allowed':true},
+  ]
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl:ModalController, public fsp: FirestorageProvider,  public afAuth: AngularFireAuth) {
 
   }
@@ -30,10 +40,21 @@ export class JournalPage {
           else
           {
             this.fetchJournal();
+            this.fetchProfile();
 
           }
       })
     }
+    roundNumber(nr) {
+      return Math.round(nr * 100)/100;
+    }
+
+    fetchProfile(){
+      this.fsp.fetchProfile().then(()=>{
+        this.myProfile = this.fsp.profile;
+      });
+    }
+
 
   convertDate(input){
     var weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -44,28 +65,36 @@ export class JournalPage {
 
   fetchJournal(){
     this.fsp.fetchJournal().subscribe( snapshots => {
-      console.log(snapshots);
       this.snapshots = snapshots;
 
     })
   }
 
   fetchJournalWithFilter(start, end){
+    let allowedCategories = this.allCategories.filter(cat=>cat.allowed == true).map(cat=>cat.title);
+    console.log(allowedCategories);
     this.fsp.fetchJournalWithFilter(start, end).subscribe( snapshots => {
-      this.snapshots = snapshots;
-
+      this.snapshots = snapshots.filter(snp =>{
+        // console.log(snp.category, allowedCategories.findIndex( x=> x.title != snp.category ))
+        // console.log(snp.category, allowedCategories, allowedCategories.findIndex( x=> x.toString() == snp.category.toString() ),  allowedCategories.findIndex( x=> x.toString() = snp.category.toString() ) > -1);
+        allowedCategories.findIndex( x=> x.toString() == snp.category.toString() ) < 0
+        });
+      console.log(snapshots.length);
+      console.log(this.snapshots.length);
     })
+    // console.log(this.snapshots.length);
   }
 
    changedFilter(){
-     console.log('CHANGED');
-     console.log(Date.parse(this.timeStart), Date.parse(this.timeEnd));
-     this.fetchJournal();
+     // console.log(Date.parse(this.timeStart), Date.parse(this.timeEnd));
+     // this.fetchJournal();
      // if (Date.parse(this.timeStart) < Date.parse(this.timeEnd) )/
       this.fetchJournalWithFilter(Date.parse(this.timeStart), Date.parse(this.timeEnd));
    }
 
-
+   deleteSnapshot(snapshot){
+     this.fsp.deleteSnapshot(snapshot);
+   }
 
   addSnapshot(){
     let addSnapshotModal = this.modalCtrl.create(AddSnapshotModalPage);

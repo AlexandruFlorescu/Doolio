@@ -8,6 +8,18 @@
 
   <ion-navbar>
     <ion-title>Journal</ion-title>
+
+          <ion-row nowrap>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.treatPoints)}}' typeIcon = 'beer' typeText = "TP"></chip>
+            </ion-col>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.fitnessPoints)}}' typeIcon = 'walk' typeText = "FP"></chip>
+            </ion-col>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.money)}}' typeIcon = 'cash' typeText = "{{myProfile.currency}}"></chip>
+            </ion-col>
+          </ion-row>
   </ion-navbar>
 
 </ion-header>
@@ -31,52 +43,51 @@
 
       <ion-grid>
         <ion-row>
-          <ion-item col-2>
+          <ion-item col-3>
             <ion-label>Start Time</ion-label>
-            <ion-datetime displayFormat="DD MMM YYYY h:mm A" pickerFormat="DD MMM YYYY h mm A" [(ngModel)]="timeStart" (ionChange)='changedFilter()'>Start Time</ion-datetime>
+            <ion-datetime displayFormat="DD MMM YYYY h:mm A" disabled pickerFormat="DD MMM YYYY h mm A" [(ngModel)]="timeStart" (ionChange)='changedFilter()'>Start Time</ion-datetime>
           </ion-item>
 
           <ion-item col-4 >
             <ion-title text-center>Filter your journal</ion-title>
           </ion-item>
 
-          <ion-item col-2>
+          <ion-item col-3>
             <ion-label>End Time</ion-label>
-            <ion-datetime displayFormat="DD MMM YYYY h:mm A" pickerFormat="DD MMM YYYY h mm A" [(ngModel)]="timeEnd" (ionChange)='changedFilter()'></ion-datetime>
+            <ion-datetime displayFormat="DD MMM YYYY h:mm A" disabled pickerFormat="DD MMM YYYY h mm A" [(ngModel)]="timeEnd" (ionChange)='changedFilter()'></ion-datetime>
           </ion-item>
         </ion-row>
+        <ion-row >
+          <ion-col *ngFor='let cat of allCategories' col-2>
+            <ion-item>
+              <ion-label>{{cat.title}}</ion-label>
+              <ion-checkbox style="margin:3px;" [(ngModel)]="cat.allowed" (ionChange)="changedFilter()" disabled></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <!-- {{snapshots | json}} -->
+        <ion-row *ngFor='let snapshot of snapshots' class="snapshotStyle" padding-top>
+          <!-- <ion-item *ngIf="snapshot.category" > -->
+            <ion-col col-11>
+              <div [innerHTML]=snapshot.text></div>
+            </ion-col>
 
-        <ion-row *ngFor='let snapshot of snapshots'>
-            <ion-col col-2>
-              <ion-row>
-                <ion-col>
-                  <ion-row justify-content-center>
-                    {{ convertDate(snapshot.timestamp).split('|')[0] }}
-                  </ion-row>
+            <ion-col class='actionButtons' col-1 nopadding>
+              <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+                <button ion-button icon-only small color='danger' (click)='deleteSnapshot(snapshot)'>
+                  <ion-icon name='trash'></ion-icon>
+                </button>
 
-                  <ion-row justify-content-center>
-                    {{ convertDate(snapshot.timestamp).split('|')[1] }}
-                  </ion-row>
-                </ion-col>
+              </ion-row>
+              <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+                <button ion-button icon-only small color='good' (click)='updateSnapshot(snapshot)' disabled>
+                  <ion-icon name='create'></ion-icon>
+                </button>
               </ion-row>
             </ion-col>
-            <ion-col>
-              <div [innerHTML]=snapshot.text></div>
-
-
-            </ion-col>
-
-            <ion-col>
-              <ion-row justify-content-center>{{snapshot.rewardedTP}} TP</ion-row>
-              <ion-row justify-content-center>{{snapshot.rewardedFP}} FP</ion-row>
-              <ion-row justify-content-center>{{snapshot.rewardedMoney}} Money</ion-row>
-            </ion-col>
-
-
-            <ion-col>
-              <ion-row justify-content-center>{{snapshot.category}}</ion-row>
-            </ion-col>
+          <!-- </ion-item> -->
         </ion-row>
+
       </ion-grid>
     </ion-card-content>
 

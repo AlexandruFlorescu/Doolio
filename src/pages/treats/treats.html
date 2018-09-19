@@ -8,6 +8,18 @@
 
   <ion-navbar>
     <ion-title>Treats and Wishes</ion-title>
+
+          <ion-row nowrap>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.treatPoints)}}' typeIcon = 'beer' typeText = "TP"></chip>
+            </ion-col>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.fitnessPoints)}}' typeIcon = 'walk' typeText = "FP"></chip>
+            </ion-col>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.money)}}' typeIcon = 'cash' typeText = "{{myProfile.currency}}"></chip>
+            </ion-col>
+          </ion-row>
   </ion-navbar>
 
 </ion-header>
@@ -28,69 +40,84 @@
     </ion-navbar>
     <ion-card-content>
 
-      <ion-label col-3>Current Amount: {{roundNumber(myProfile.treatPoints)}}</ion-label>
-      <ion-label col-3>Current Amount: {{roundNumber(myProfile.fitnessPoints)}}</ion-label>
-      <ion-label col-3>Current Amount: {{roundNumber(myProfile.money)}}</ion-label>
-      <ion-grid>
-        <ion-row *ngFor='let treat of treats'>
 
-            <ion-col col-2>
-              <ion-row>
-                {{treat.title}}
-              </ion-row>
-              <ion-row>
-                {{treat.quantity}} {{treat.units}} left
-              </ion-row>
+      <ion-grid >
+        <ion-row *ngFor='let treat of treats' class='treatRowStyle' nowrap >
+
+            <ion-col >
+                <ion-row text-center padding-bottom>
+                  <ion-title ion-text color='primary' >
+                    {{treat.title | uppercase}}
+                  </ion-title>
+                  <p ion-text text-center color='light'>
+                    {{treat.quantity}} {{treat.units}} left
+                  </p>
+
+                </ion-row>
+
+
+                <ion-row>
+                  <ion-col>
+                    <chip amount='{{treat.TP}}' typeIcon = 'beer' typeText = "TP" color='danger'></chip>
+                  </ion-col>
+                  <ion-col>
+                    <chip amount='{{treat.FP}}' typeIcon = 'walk' typeText = "FP" color='danger'></chip>
+                  </ion-col>
+                  <ion-col>
+                    <chip amount='{{treat.Money}}' typeIcon = 'cash' typeText = "{{myProfile.currency}}" color='danger'></chip>
+                  </ion-col>
+                </ion-row>
+                  <!-- <ion-label stacked color='danger'>TP/{{treat.unit}}</ion-label>
+                  <ion-input [(ngModel)]='treat.TP' #treatTP ></ion-input> -->
+
+
+                  <!-- <ion-label stacked color='danger'>FP/{{treat.unit}}</ion-label>
+                  <ion-input [(ngModel)]='treat.FP' #treatFP></ion-input> -->
+
+                  <!-- <ion-label stacked color='danger'>{{myProfile.currency}}/{{treat.unit}}</ion-label>
+                  <ion-input [(ngModel)]='treat.Money' #treatMoney></ion-input> -->
+                  <!-- <button ion-button (click)='updateTreat(treat)'>Update</button> -->
+
+
             </ion-col>
 
-            <ion-col>
-              <ion-row>
-                <ion-item col-3>
-                  <ion-label stacked color='danger'>Treat Points Cost per 1 {{treat.unit}}</ion-label>
-                  <ion-input [(ngModel)]='treat.TP' #treatTP></ion-input>
-                </ion-item>
-
-                <ion-item col-3>
-                  <ion-label stacked color='danger'>Fitness Points Cost per 1 {{treat.unit}}</ion-label>
-                  <ion-input [(ngModel)]='treat.FP' #treatFP></ion-input>
-                </ion-item>
-
-                <ion-item col-3>
-                  <ion-label stacked color='danger'>Money Cost per 1 {{treat.unit}}</ion-label>
-                  <ion-input [(ngModel)]='treat.Money' #treatMoney></ion-input>
-                </ion-item>
-                <button ion-button (click)='updateTreat(treat)'>Update</button>
-                <button ion-button color='danger' (click)='deleteTreat(treat)'>Delete</button>
-              </ion-row>
-            </ion-col>
 
             <ion-col>
-              <ion-row>
-                <button ion-button (click)='grab(treat, -1)'>
-                  <ion-icon name='remove' ></ion-icon>
-                  1 {{treat.unit}}
-                </button>
-                <button ion-button (click)='grab(treat, -10)'>
-                  <ion-icon name='remove'></ion-icon>
-                  10 {{treat.units}}
-                </button>
-                <button ion-button (click)='grab(treat, -100)'>
-                  <ion-icon name='remove'></ion-icon>
-                  100 {{treat.units}}
-                </button>
+              <ion-row text-center>
+                  <ion-label text-right> Grab: </ion-label>
+                  <button ion-button (click)='grab(treat, -1)'>
+                    &nbsp; 1 {{treat.unit}}
+                  </button>
+                  <button ion-button (click)='grab(treat, -10)'>
+                    10 {{treat.units}}
+                  </button>
+                  <button ion-button (click)='grab(treat, -100)'>
+                    100 {{treat.units}}
+                  </button>
               </ion-row>
               <ion-row>
+                <ion-label text-right> Add: </ion-label>
                 <button ion-button (click)='supplement(treat, 1)'>
-                  <ion-icon name='add'></ion-icon>
                   1 {{treat.units}}
                 </button>
                 <button ion-button (click)='supplement(treat, 10)'>
-                  <ion-icon name='add'></ion-icon>
                   10 {{treat.units}}
                 </button>
                 <button ion-button (click)='supplement(treat, 100)'>
-                  <ion-icon name='add'></ion-icon>
                   100 {{treat.units}}
+                </button>
+              </ion-row>
+            </ion-col>
+
+            <ion-col class='actionButtons'  col-1 nopadding>
+              <ion-row text-right class='actionButton'>
+                <button ion-button icon-only small color='danger' (click)='deleteTreat(treat)' margin-bottom >
+                  <ion-icon name='trash'></ion-icon>
+                </button>
+              </ion-row>
+              <ion-row text-right class='actionButton'>
+                <button ion-button icon-only small color='good' (click)='updateTreat(treat)' disabled margin-bottom>
+                  <ion-icon name='create'></ion-icon>
                 </button>
               </ion-row>
             </ion-col>

@@ -14,9 +14,12 @@
 
 
 <ion-content padding>
+  <ion-navbar color='primary'>
+    <ion-title>Treat details</ion-title>
+  </ion-navbar>
+
 
     <ion-list>
-      <ion-list-header color='secondary'>Treats details</ion-list-header>
       <ion-item>
         <ion-label stacked>Title</ion-label>
         <ion-input type='text' placeholder="Treat or Wish name" [(ngModel)] = 'treat.title'></ion-input>

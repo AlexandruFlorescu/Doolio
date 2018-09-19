@@ -1,0 +1,35 @@
+<!--
+  Generated template for the AddExerciseToPlanPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Exercise To Plan</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+      <ion-navbar color='primary'>
+        <ion-title>Exercise plan details</ion-title>
+      </ion-navbar>
+
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>Title</ion-label>
+          <ion-input type='text' placeholder="Exercise name" [(ngModel)] = 'exercise.exercise'></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>How many repetitions should be done?</ion-label>
+          <ion-input type='number' value=0 [(ngModel)] = 'exercise.repsShould'></ion-input>
+        </ion-item>
+
+        <button ion-button (click)='addExercise()'>Add new exercise</button>
+      </ion-list>
+</ion-content>

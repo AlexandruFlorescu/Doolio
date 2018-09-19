@@ -34,8 +34,10 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #4a86e8,
   secondary:  #32db64,
+  good:       #32db64,
+  inter:      orange,
   ternary:    purple,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -43,19 +45,18 @@ $colors: (
 );
 
 $break-small: 460px;
-$break-large: 1200px;
+$break-large: 767px;
 
 ion-menu {
-  max-width: 250px!important;
+  max-width: 305px!important;
   @media screen and (max-width: $break-small) {
     max-width: 590px!important;
 
   }
-  @media screen and (min-width: $break-large) {
-
+  @media screen and (max-width: $break-large) {
+    max-width: 590px!important;
   }
 }
-
 
 // App iOS Variables
 // --------------------------------------------------

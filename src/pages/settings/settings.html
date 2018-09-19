@@ -19,8 +19,8 @@
       <ion-title>Journal formulations</ion-title>
     </ion-navbar>
     <ion-card-content>
-      <p>Feel free to change the templates to your own likings. Some templates include variables. You should use those, but only those are available atm.</p>
-      {{formulas | json}}
+      <p ion-text color='light'>Feel free to change the templates to your own likings. Some templates include variables. You should use those, but only those are available atm.</p>
+      <!-- {{formulas | json}} -->
       <ion-item>
         <ion-label stacked>Introductory formula</ion-label>
         <ion-input type='text' [(ngModel)] = 'formulas.Introductory.text'></ion-input>
@@ -54,6 +54,11 @@
       <ion-item>
         <ion-label stacked>Finished goal</ion-label>
         <ion-input type='text' [(ngModel)] = 'formulas.FinishedGoal.text'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Added chore</ion-label>
+        <ion-input type='text' [(ngModel)] = 'formulas.AddedChore.text'></ion-input>
       </ion-item>
 
       <ion-item>

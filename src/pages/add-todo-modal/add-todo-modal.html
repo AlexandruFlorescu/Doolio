@@ -14,9 +14,12 @@
 
 
 <ion-content padding>
+      <ion-navbar color='primary'>
+        <ion-title>Todo details</ion-title>
+      </ion-navbar>
 
       <ion-list>
-        <ion-list-header color='secondary'>Todo details</ion-list-header>
+
         <ion-item>
           <ion-label stacked>Title</ion-label>
           <ion-input type='text' placeholder="Todo name" [(ngModel)] = 'todo.title'></ion-input>
@@ -30,7 +33,7 @@
 
         <ion-item>
           <ion-label stacked>Treat Point Reward</ion-label>
-          <ion-input type='number' [(ngModel)] = 'todo.TP'></ion-input>
+          <ion-input type='number' value=0 [(ngModel)] = 'todo.TP'></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Fitness Point Reward</ion-label>

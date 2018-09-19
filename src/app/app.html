@@ -1,16 +1,33 @@
 <ion-split-pane>
   <ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
 
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
+
+    <ion-content class='menuStyle'>
+      <ion-navbar color='primary'>
+        <ion-title>
+          Menu
+        </ion-title>
+      </ion-navbar>
+          <ion-grid>
+            <ion-row center class="profileStyle" >
+             <ion-col style='align-items:center'>
+               <img src='{{myProfile ? myProfile.image :"https://via.placeholder.com/350x150"}}' (click)="openPage()" alt="profile" class='profile'>
+             </ion-col>
+            </ion-row>
+
+        </ion-grid>
+      <ion-list class='buttonStyle'>
+        <ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)" [class.activeHighlight]='checkActive(p)' padding-horizontal class='buttonStyle' text-center>
+          <ion-icon name='{{p.icon}}' class='menuIcons'> {{p.title}} </ion-icon>
+          <ion-icon name="arrow-dropright" class='arrowStyle' float-right></ion-icon>
+        </ion-item>
+
+
+        <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class='buttonStyle' no-lines>
+          <ion-icon class='icon' color='secondary' name={{p.icon}}></ion-icon>
+          <span class='nameStyle'>{{p.title}}</span>
+          <ion-icon name="arrow-dropright" class='arrowStyle' float-right></ion-icon>
+        </button> -->
       </ion-list>
     </ion-content>
 

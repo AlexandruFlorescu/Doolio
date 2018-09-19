@@ -38,6 +38,10 @@ export class SettingsPage {
         title: 'FinishedChore',
         text: ''
     },
+    'AddedChore': {
+        title: 'AddedChore',
+        text: ''
+    },
     'FinishedGoal': {
         title: 'FinishedGoal',
         text: ''

@@ -8,6 +8,18 @@
 
   <ion-navbar>
     <ion-title>Todos</ion-title>
+
+          <ion-row nowrap>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.treatPoints)}}' typeIcon = 'beer' typeText = "TP"></chip>
+            </ion-col>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.fitnessPoints)}}' typeIcon = 'walk' typeText = "FP"></chip>
+            </ion-col>
+            <ion-col>
+              <chip amount='{{roundNumber(myProfile.money)}}' typeIcon = 'cash' typeText = "{{myProfile.currency}}"></chip>
+            </ion-col>
+          </ion-row>
   </ion-navbar>
 
 </ion-header>
@@ -28,48 +40,52 @@
           </ion-buttons>
         </ion-navbar>
         <ion-card-content>
-
+<!--
           <ion-label col-3>Current Amount: {{roundNumber(myProfile.treatPoints)}}</ion-label>
           <ion-label col-3>Current Amount: {{roundNumber(myProfile.fitnessPoints)}}</ion-label>
-          <ion-label col-3>Current Amount: {{roundNumber(myProfile.money)}}</ion-label>
+          <ion-label col-3>Current Amount: {{roundNumber(myProfile.money)}}</ion-label> -->
           <ion-grid>
             <ion-row *ngFor='let todo of todos'>
-                <ion-col col-2>
-                  <ion-row>
-                    <ion-title>
-                      {{todo.title}}
-                    </ion-title>
-                  </ion-row>
-                  <ion-row>
-                    {{todo.description}}
-                  </ion-row>
+                <ion-col >
+                  <ion-card no-margin>
+                    <ion-card-header color='primary' text-wrap style="font-size: 25px!important;" text-center>
+                      {{todo.title |uppercase}}
+                    </ion-card-header>
+                    <ion-card-content>
+                      {{todo.description}}
+
+                    </ion-card-content>
+                  </ion-card>
                 </ion-col>
 
-                <ion-col>
-
-                  <ion-row>
-                    <ion-item col-3>
-                      <ion-label stacked>TreatPoints per 1 {{todo.unit}}</ion-label>
-                      <ion-input [(ngModel)]='todo.TP' ></ion-input>
-                    </ion-item>
-
-                    <ion-item col-3>
-                      <ion-label stacked>FitnessPoints per 1 {{todo.unit}}</ion-label>
-                      <ion-input [(ngModel)]='todo.FP'></ion-input>
-                    </ion-item>
-
-                    <ion-item col-3>
-                      <ion-label stacked>Money per 1 {{todo.unit}}</ion-label>
-                      <ion-input [(ngModel)]='todo.Money'></ion-input>
-                    </ion-item>
-                    <button ion-button (click)='updateTodo(todo)'>Update</button>
-                    <button ion-button color='danger' (click)='deleteTodo(todo)'>Delete</button>
-
-                    <button ion-button (click)='complete(todo)'>Done!</button>
+                <ion-col col-4>
+                  <ion-row align-items-center>
+                    <chip amount='{{todo.TP}}' typeIcon='beer' typeText="TP" color='good'></chip>
+                    <chip amount='{{todo.FP}}' typeIcon='walk' typeText="FP" color='good'></chip>
+                    <chip amount='{{todo.Money}}' typeIcon='cash' typeText="{{myProfile.currency}}" color='good'></chip>
                   </ion-row>
                 </ion-col>
 
 
+                <ion-col class='actionButtons' col-1 nopadding>
+                  <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+                    <button ion-button icon-only small color='primary' (click)='complete(todo)'>
+                      <ion-icon name='checkmark'></ion-icon>
+                    </button>
+                  </ion-row>
+
+                  <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+                    <button ion-button icon-only small color='danger' (click)='deleteTodo(todo)'>
+                      <ion-icon name='trash'></ion-icon>
+                    </button>
+                  </ion-row>
+
+                  <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+                    <button ion-button icon-only small color='good' (click)='updateTodo(todo)' disabled>
+                      <ion-icon name='create'></ion-icon>
+                    </button>
+                  </ion-row>
+                </ion-col>
             </ion-row>
           </ion-grid>
         </ion-card-content>

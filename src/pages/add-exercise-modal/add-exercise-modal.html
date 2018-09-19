@@ -14,8 +14,12 @@
 
 
 <ion-content padding>
+
+  <ion-navbar color='primary'>
+    <ion-title>Exercise details</ion-title>
+  </ion-navbar>
+
   <ion-list>
-    <ion-list-header color='secondary'>Exercise details</ion-list-header>
     <ion-item>
       <ion-label stacked>Title</ion-label>
       <ion-input type='text' placeholder="Exercise name" [(ngModel)] = 'exercise.title'></ion-input>

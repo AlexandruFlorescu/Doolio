@@ -1,0 +1,44 @@
+.choreStyle{
+  border-bottom: 1px solid color($colors, primary);
+  border-top: 1px solid color($colors, primary);
+}
+.done{
+  color: color($colors, good);
+}
+.undone{
+  color: color($colors, danger);
+}
+.incomplete{
+  color: color($colors, inter);
+}
+
+.headerStyle{
+  padding: 0px !important;
+  border-left: 1px solid color($colors, primary);
+  border-right: 1px solid color($colors, primary);
+  font-size: 22px;
+}
+
+.headerHighlight{
+  background-color: color($colors, inter);
+  color: color($colors, dark);
+  font-weight: bold;
+
+
+  &:after{
+    content: 'Today';
+    // color: color($colors, light);
+    float: right;
+    font-size: 13px;
+    font-weight: 150;
+  }
+  // border-left: 1px solid color($colors, inter);
+  // border-right: 1px solid color($colors, inter);
+}
+
+
+.cellHighlight{
+  border-left: 1px solid color($colors, inter);
+  border-right: 1px solid color($colors, inter);
+  // padding: 0px !important;
+}

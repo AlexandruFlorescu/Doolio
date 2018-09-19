@@ -3,32 +3,93 @@ page-journal {
 }
 .pStyle{
   color: color($colors, light) !important;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .rewardsStyle{
   color: color($colors, secondary);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .timeStyle{
   color: color($colors, primary);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .dateStyle{
   color: color($colors, primary);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .exerciseStyle{
   color: color($colors, ternary);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .todosStyle{
   color: color($colors, ternary);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .costsStyle{
   color: color($colors, danger);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .treatStyle{
   color: color($colors, ternary);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.goalStyle{
+  color: color($colors, ternary);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.progressStyle{
+  color: color($colors, secondary);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.leftStyle{
+  color: color($colors, danger);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
+.choreTitleStyle{
+  color: color($colors, primary);
+  font-size: 20px;
+  font-weight: bold;
+}
+.done{
+  color: color($colors, good);
+  font-size: 20px;
+  font-weight: bold;
+}
+.undone{
+  color: color($colors, danger);
+  font-size: 20px;
+  font-weight: bold;
+}
+.incomplete{
+  color: color($colors, inter);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.snapshotStyle{
+  border-bottom: 1px solid color($colors, inter);
 }

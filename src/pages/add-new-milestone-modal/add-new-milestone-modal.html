@@ -1,0 +1,41 @@
+<!--
+  Generated template for the AddNewMilestoneModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>AddNewMilestoneModal</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-navbar color='primary'>
+      <ion-title>Milestone details</ion-title>
+    </ion-navbar>
+
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Title</ion-label>
+        <ion-input type='text' placeholder="Goal name" [(ngModel)] = 'milestone.title'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Description</ion-label>
+        <ion-input type='textarea' placeholder="Describe the goal here" [(ngModel)] = 'milestone.description'></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label stacked>Progress</ion-label>
+        <ion-input type='number' value=0 [(ngModel)] = 'milestone.progress'></ion-input>
+      </ion-item>
+
+      <button ion-button (click)='addMilestone()'>Add new milestone</button>
+    </ion-list>
+</ion-content>

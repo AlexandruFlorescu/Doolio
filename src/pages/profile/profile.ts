@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { FirestorageProvider } from '../../providers/firestorage/firestorage';
 import { ChangePictureModalPage } from '../change-picture-modal/change-picture-modal';
@@ -22,9 +22,9 @@ export class ProfilePage {
   // profile = { } as Profile;
   // profile: any;
 
-  myProfile = {image:""};
+  myProfile = {image:"https://via.placeholder.com/350x150", fitnessPoints:0, money:0, treatPoints: 0};
   new = true;
-  constructor(  public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController, public afAuth: AngularFireAuth) {
+  constructor(  public navCtrl: NavController, public navParams: NavParams, public fsp: FirestorageProvider, public modalCtrl: ModalController, public afAuth: AngularFireAuth, public toastCtrl: ToastController) {
   }
 
 
@@ -36,6 +36,8 @@ export class ProfilePage {
           else
           {
               this.fetchProfile();
+              // if(this.new == true && this.myProfile.username == null)
+
           }
       })
     }
@@ -54,6 +56,8 @@ export class ProfilePage {
         this.new = false;
 
       }
+      else
+      this.createProfile();
     });
   }
 
@@ -63,8 +67,15 @@ export class ProfilePage {
   // Profile
 
   createProfile(){
-    console.log('createProfile');
-    this.fsp.createProfile(this.myProfile);
+    this.fsp.initializeFormulas();
+    this.fsp.createProfile(this.myProfile).then(() => this.toastCtrl.create(
+      {
+        message: 'Profile created',
+        duration: 3000,
+        position: 'top',
+        }
+      ).present()
+    )
   }
 
   updateProfile(){

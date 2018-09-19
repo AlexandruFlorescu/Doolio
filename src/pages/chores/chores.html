@@ -1,0 +1,126 @@
+<!--
+  Generated template for the ChoresPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Chores</ion-title>
+
+    <ion-row nowrap>
+      <ion-col>
+        <chip amount='{{roundNumber(myProfile.treatPoints)}}' typeIcon='beer' typeText="TP"></chip>
+      </ion-col>
+      <ion-col>
+        <chip amount='{{roundNumber(myProfile.fitnessPoints)}}' typeIcon='walk' typeText="FP"></chip>
+      </ion-col>
+      <ion-col>
+        <chip amount='{{roundNumber(myProfile.money)}}' typeIcon='cash' typeText="{{myProfile.currency}}"></chip>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-navbar color='primary'>
+      <ion-title>
+        Chores List
+      </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)='addChores()'>
+          <ion-icon name='add'></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+    <ion-card-content>
+
+      <!-- <ion-label col-3>Current Amount: {{roundNumber(myProfile.treatPoints)}}</ion-label>
+      <ion-label col-3>Current Amount: {{roundNumber(myProfile.fitnessPoints)}}</ion-label>
+      <ion-label col-3>Current Amount: {{roundNumber(myProfile.money)}}</ion-label> -->
+      <ion-grid>
+        <ion-row>
+          <ion-col offset-2 col-1>
+            <button ion-button icon-only color='good' tooltip="I'm a tooltip below a button" positionV="bottom" arrow (click)='refreshWeek()'>
+              <ion-icon name='refresh'></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col text-center [class.headerHighlight]="currentDay == 1" class='headerStyle'>
+            Mon
+          </ion-col>
+          <ion-col text-center [class.headerHighlight]="currentDay == 2" class='headerStyle'>
+            Tue
+          </ion-col>
+          <ion-col text-center [class.headerHighlight]="currentDay == 3" class='headerStyle'>
+            Wed
+          </ion-col>
+          <ion-col text-center [class.headerHighlight]="currentDay == 4" class='headerStyle'>
+            Thu
+          </ion-col>
+          <ion-col text-center [class.headerHighlight]="currentDay == 5" class='headerStyle'>
+            Fri
+          </ion-col>
+          <ion-col text-center [class.headerHighlight]="currentDay == 6" class='headerStyle'>
+            Sat
+          </ion-col>
+          <ion-col text-center [class.headerHighlight]="currentDay == 7" class='headerStyle'>
+            Sun
+          </ion-col>
+
+        </ion-row>
+        <ion-row *ngFor='let chore of chores' class="choreStyle">
+          <!-- Details about the chore -->
+          <ion-col col-3>
+            <ion-row>
+              <ion-title text-center>{{chore.title}}</ion-title>
+            </ion-row>
+            <ion-row nowrap>
+
+              <chip amount='{{chore.TP}}' typeIcon='beer' typeText="TP" color='good'></chip>
+              <chip amount='{{chore.FP}}' typeIcon='walk' typeText="FP" color='good'></chip>
+              <chip amount='{{chore.Money}}' typeIcon='cash' typeText="{{myProfile.currency}}" color='good'></chip>
+
+
+
+            </ion-row>
+            <ion-row align-items-center	justify-content-center	>
+              <button ion-button icon-only small color='danger' (click)='deleteChore(chore)'>
+                <ion-icon name='trash'></ion-icon>
+              </button>
+              <button ion-button icon-only small color='good' (click)='updateChore(chore)' disabled>
+                <ion-icon name='create'></ion-icon>
+              </button>
+            </ion-row>
+
+          </ion-col>
+
+          <!-- Togglers -->
+          <ion-col *ngFor='let day of chore.daysShould; let i = index' [class.cellHighlight]="currentDay -1== i" nopadding>
+            <ion-row nowrap>
+              <ion-col text-center [ngClass]="chore.daysDid[i]==day?'done': (chore.daysDid[i]==0? 'undone': 'incomplete')" nopadding style="margin-top: -16px!important;">
+
+                <ion-range min="0" max="{{day}}" [(ngModel)]="chore.daysDid[i]" snaps="true" step="1" disabled='true' nopadding>
+                  <!-- <ion-icon small range-left name="sunny"></ion-icon>
+                   <ion-icon range-right name="sunny"></ion-icon> -->
+                  {{chore.daysDid[i]}} {{day}}
+                </ion-range>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col text-center style="margin-top: -16px!important;">
+                <button ion-button (click)='mark1(chore, i)'>+1</button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+
+
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

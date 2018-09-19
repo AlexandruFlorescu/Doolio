@@ -38,30 +38,22 @@ export class TreatsPage {
             this.fetchTreats();
         }
     })
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TreatsPage');
-  }
-
-
+  } //login guard
   fetchProfile(){
     this.fsp.fetchProfile().then(()=>{
       this.myProfile = this.fsp.profile;
     });
-  }
-
+  } // provides the profile
   fetchTreats(){
     this.fsp.fetchTreats().subscribe( treats =>{
       this.treats = treats;
     });
-  }
-
+  } // provides the treats
   supplement(treat, amount){
     this.fsp.updateQuantity(treat, parseFloat(amount));
-  }
-
+  } // supplements treats quantity
   grab(treat, amount){
+    console.log(treat, amount);
     if(this.fsp.canAfford(treat, amount)){
       this.addTreatPoints(parseFloat(amount) * treat.TP)
       this.addFitnessPoints(parseFloat(amount) * treat.FP)
@@ -78,23 +70,23 @@ export class TreatsPage {
       });
       alert.present();
     }
-  }
-
+  } // take a treat
   addTreat(){
     let addTreatModal = this.modalCtrl.create(AddTreatModalPage);
     addTreatModal.present();
-  }
-
+  } // add a new treat
   deleteTreat(treat){
     this.fsp.deleteTreat(treat);
-  }
-
+  } // delete a treat
   updateTreat(treat){
+    // let addTreatModal = this.modalCtrl.create(AddTreatModalPage, {'treat': treat});
+    // addTreatModal.present();
     this.fsp.updateTreat(treat);
-  }
+  } // update a treat
+
   roundNumber(nr) {
     return Math.round(nr * 100)/100;
-  }
+  } //
 
   // Update Reward Points
   addTreatPoints(amount: number){

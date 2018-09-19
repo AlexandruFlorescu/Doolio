@@ -1,0 +1,159 @@
+<!--
+  Generated template for the GoalsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Goals</ion-title>
+
+    <ion-row nowrap>
+      <ion-col>
+        <chip amount='{{roundNumber(myProfile.treatPoints)}}' typeIcon='beer' typeText="TP"></chip>
+      </ion-col>
+      <ion-col>
+        <chip amount='{{roundNumber(myProfile.fitnessPoints)}}' typeIcon='walk' typeText="FP"></chip>
+      </ion-col>
+      <ion-col>
+        <chip amount='{{roundNumber(myProfile.money)}}' typeIcon='cash' typeText="{{myProfile.currency}}"></chip>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+
+    <ion-navbar color='primary'>
+      <ion-title>
+        Goals
+
+      </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)='addGoal()'>
+            <ion-icon name='add'></ion-icon>
+          </button>
+      </ion-buttons>
+    </ion-navbar>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor='let goal of goals' margin-bottom nowrap>
+          <ion-col col-3 no-padding>
+            <ion-card no-margin>
+              <ion-card-header color='primary' text-wrap style="font-size: 25px!important;" text-center>
+                {{goal.title |uppercase}}
+              </ion-card-header>
+              <ion-card-content>
+                {{goal.description}}
+
+              </ion-card-content>
+            </ion-card>
+            <ion-row>
+              <!-- <ion-col>
+                    Current progress: {{goal.progress}} % <br>
+
+                  </ion-col> -->
+              <!-- <progress-bar [progress]="goal.progress"></progress-bar> -->
+            </ion-row>
+          </ion-col>
+
+          <ion-col col-8>
+
+            <ion-row nowrap style="border-bottom: 1px solid silver">
+              <ion-col>
+                <chip amount='{{goal.TP}}' typeIcon='beer' typeText="TP" color='good'></chip>
+                <chip amount='{{goal.FP}}' typeIcon='walk' typeText="FP" color='good'></chip>
+                <chip amount='{{goal.Money}}' typeIcon='cash' typeText="{{myProfile.currency}}" color='good'></chip>
+
+              </ion-col>
+              <ion-col col-4 style="margin-top: -16px!important;">
+                <ion-item>
+                  <ion-label stacked>Progress</ion-label>
+                  <ion-input [(ngModel)]='progress' type='number' min=0></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-1 style=" padding-right: 7px;">
+                <button ion-button icon-only color='good' (click)='addProgress(goal)'><ion-icon name='add'></ion-icon></button>
+              </ion-col>
+              <!--
+                  <button ion-button (click)='updateGoal(goal)'>Update</button>
+                  <button ion-button color='danger' (click)='deleteGoal(goal)'>Delete</button> -->
+
+
+
+
+            </ion-row>
+            <ion-row *ngFor='let milestone of goal.milestones; let i = index' class="milestoneStyle">
+              <ion-item style="padding:0px!important; flex-basis: 9.5%;">
+                <ion-checkbox checked="{{milestone.progress <= goal.progress}}" [disabled]="milestone.progress <= goal.progress" style="margin: 3px!important;" (click)="checkMilestone(goal, i)"></ion-checkbox>
+                <ion-label [ngClass]="milestone.progress <= goal.progress ? 'finished':'unfinished'">{{milestone.progress}}</ion-label>
+              </ion-item>
+
+              <ion-col col-10 padding-top>
+                <ion-card>
+                  <ion-card-header color='primary'>
+                    {{milestone.title}}
+
+                  </ion-card-header>
+                  <ion-card-content>
+                    {{milestone.description}}
+
+                  </ion-card-content>
+                </ion-card>
+
+              </ion-col>
+              <ion-col class='actionMSButtons' col-1>
+                <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+                  <button ion-button icon-only small color='danger' (click)='deleteMilestone(goal, i)'>
+                          <ion-icon name='trash'></ion-icon>
+                        </button>
+                </ion-row>
+                <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+                  <button ion-button icon-only small color='good' (click)='editMilestone(goal, i)' disabled>
+                          <ion-icon name='create'></ion-icon>
+                        </button>
+                </ion-row>
+              </ion-col>
+
+
+            </ion-row>
+            <ion-row>
+              <ion-col text-center>
+                <button ion-button (click)='addNewMilestone(goal)'>
+                      <ion-icon name='add'></ion-icon>
+                      Add new milestone
+                    </button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+
+          <ion-col class='actionButtons' col-1 nopadding>
+            <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+              <button ion-button icon-only small color='primary' (click)='complete(goal)'>
+                    <ion-icon name='checkmark'></ion-icon>
+                  </button>
+            </ion-row>
+
+            <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+              <button ion-button icon-only small color='danger' (click)='deleteGoal(goal)'>
+                    <ion-icon name='trash'></ion-icon>
+                  </button>
+            </ion-row>
+            <ion-row text-right class='actionButton' style="margin-top: 0px!important;">
+              <button ion-button icon-only small color='good' (click)='updateGoal(goal)' disabled>
+                    <ion-icon name='create'></ion-icon>
+                  </button>
+            </ion-row>
+
+            <!-- <button ion-button (click)='complete(goal)'>Done!</button> -->
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,3 +1,15 @@
-page-treats {
+.treatRowStyle{
+  color: color($colors, primary);
+  border-bottom: 1px solid color($colors, inter);
 
+}
+.actionButtons{
+  border-left: 1px solid color($colors, inter);
+  width: 30px !important;
+  padding-top: 10px;
+  flex-basis: 5%;
+}
+
+.actionButton{
+  // padding-top: 4px;
 }
